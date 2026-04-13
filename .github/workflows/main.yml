@@ -34,7 +34,7 @@ jobs:
       - name: Upload JAR artifact
         uses: actions/upload-artifact@v4
         with:
-          name: TODO-jar
+          name: todo-jar
           path: target/TODO-0.0.1-SNAPSHOT.jar
 
   build-and-push-docker: 
