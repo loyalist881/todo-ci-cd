@@ -48,7 +48,7 @@ jobs:
       - name: Download JAR artifact
         uses: actions/download-artifact@v4
         with:
-          name: TODO-jar
+          name: todo-jar
           path: target
 
       - name: Log in to Docker Hub
@@ -58,10 +58,10 @@ jobs:
           password: ${{ secrets.DOCKER_PASSWORD }}
 
       - name: Build Docker image
-        run: docker build -t ${{ secrets.DOCKER_USERNAME }}/TODO:latest .
+        run: docker build -t ${{ secrets.DOCKER_USERNAME }}/todo:latest .
 
       - name: Push Docker image
-        run: docker push ${{ secrets.DOCKER_USERNAME }}/TODO:latest
+        run: docker push ${{ secrets.DOCKER_USERNAME }}/todo:latest
 
   deploy:
     needs: build-and-push-docker 
@@ -76,7 +76,7 @@ jobs:
           key: ${{ secrets.VM_SSH_KEY }}
           port: 50000
           script: |
-            docker pull ${{ secrets.DOCKER_USERNAME }}/TODO:latest
+            docker pull ${{ secrets.DOCKER_USERNAME }}/todo:latest
             docker stop todo-app || true
             docker rm todo-app || true
-            docker run -d --name calculator -p 8080:8080 ${{ secrets.DOCKER_USERNAME }}/TODO:latest
+            docker run -d --name calculator -p 8080:8080 ${{ secrets.DOCKER_USERNAME }}/todo:latest
