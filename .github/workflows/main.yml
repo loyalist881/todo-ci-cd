@@ -79,4 +79,4 @@ jobs:
             docker pull ${{ secrets.DOCKER_USERNAME }}/todo:latest
             docker stop todo-app || true
             docker rm todo-app || true
-            docker run -d --name calculator -p 8080:8080 ${{ secrets.DOCKER_USERNAME }}/todo:latest
+            docker run -d --name todo -p 8080:8080 ${{ secrets.DOCKER_USERNAME }}/todo:latest
